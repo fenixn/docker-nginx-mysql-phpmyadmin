@@ -2,7 +2,7 @@ version: "3.2"
 services:
   php:
     build: 
-      context: './php/'
+      context: './docker/php/'
       args:
        PHP_VERSION: ${PHP_VERSION}
     networks:
@@ -12,7 +12,7 @@ services:
     container_name: php
   nginx:
     build:
-      context: './nginx/'
+      context: './docker/nginx/'
       args:
        NGINX_VERSION: ${NGINX_VERSION}
     restart: always
@@ -27,7 +27,7 @@ services:
       - "443:443"
     volumes:
       - ${PROJECT_ROOT}/:/var/www/html/
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
     container_name: nginx
   mysql:
     image: mysql:${MYSQL_VERSION:-latest}
