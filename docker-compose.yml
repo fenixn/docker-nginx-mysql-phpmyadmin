@@ -4,7 +4,7 @@ services:
     build: 
       context: './docker/php/'
       args:
-       PHP_VERSION: ${PHP_VERSION}
+        PHP_VERSION: ${PHP_VERSION}
     networks:
       - backend
     volumes:
@@ -14,7 +14,7 @@ services:
     build:
       context: './docker/nginx/'
       args:
-       NGINX_VERSION: ${NGINX_VERSION}
+        NGINX_VERSION: ${NGINX_VERSION}
     restart: always
     depends_on:
       - php
@@ -35,7 +35,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-            - data:/var/lib/mysql
+      - mysql_db:/var/lib/mysql
     networks:
       - backend
     environment:
@@ -63,4 +63,5 @@ networks:
   frontend:
   backend:
 volumes:
-    data:
+  mysql_db:
+    external: true
